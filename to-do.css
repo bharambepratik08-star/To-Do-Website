@@ -1,0 +1,221 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.input_back {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input_task {
+    background-color: #DFF1F1;
+    width: 40%;
+    height: 500px;
+    border-radius: 20px;
+    visibility: hidden ;
+    opacity: 0;
+    box-shadow:0 10px 40px rgba(0,0,0,.6);
+}
+
+#task_input {
+    width: 85%;
+    height: 30px;
+    border: none;
+    font-size: 16px;
+    background-color: #BBD5DA;
+    opacity: 0.8;
+    border-radius: 20px;
+    padding: 5px 15px;
+    margin: 20px 20px 30px 20px;
+}
+
+#task_input:focus {
+    outline: none;
+}
+
+#task_description {
+    width: 85%;
+    min-height: auto;
+    border: none;
+    font-size: 16px;
+    background-color: #BBD5DA;
+    opacity: 0.8;
+    border-radius: 20px;
+    padding: 15px;
+    font-family: Arial, sans-serif;
+    margin: 20px 20px 30px 20px;
+    overflow-y: hidden;
+    resize: none;
+    box-sizing: border-box;
+    text-justify: center;
+}
+
+#task_description:focus {
+    outline: none;
+}
+
+.task_date_time_in {
+    background-color: #F62440;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    height: 30px;
+    width: 120px; 
+    display: flex;
+    align-items: center;
+    margin-left: 10px;  
+    text-align: center;
+    border: 5px solid #F62440;
+}
+
+.date_time_box {
+    display: flex;
+    align-items: center;
+    margin: 10px 20px 0px 20px;
+}
+
+.task_time {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+}
+
+.date_inp {
+    display: flex;
+    align-items: center;
+}
+
+.high {
+    background-color: red;
+}
+
+.medium {
+    background-color: orange;
+}
+
+.low {
+    background-color: green;
+}
+
+.task_priority {
+    width: 100px;
+    height: 30px;
+    border: none;
+    border-radius: 20px;
+    background-color: #F5F5F5;
+    opacity: 0.8;
+    padding: 5px 15px;
+    margin-left: 10px;
+}
+
+.end_start_text {
+    margin: 0px 20px 0px 0px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.task_d {
+    margin: 20px 0px 0px 20px
+}
+
+.task_priority:focus {
+    outline: none;
+}
+
+.priority {
+    display: flex;
+    align-items: center;
+    margin: 20px 20px 0px 20px;
+    gap: 10px;
+}
+
+.priority_text {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.cancel_add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.cancel_btn {
+    width: 100px;
+    height: 30px;
+    border: none;
+    border-radius: 20px;
+    background-color: #F5F5F5;
+    opacity: 0.8;
+    padding: 5px 15px;
+}
+
+.add_btn {
+    width: 100px;
+    height: 30px;
+    border: none;
+    border-radius: 20px;
+    background-color: #F5F5F5;
+    opacity: 0.8;
+    padding: 5px 15px;
+}
+
+.input_task.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+aside {
+    background-color: #1cb8b8;
+    width: 300px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.aside_add_task {
+    width: 60%;
+    height: 40px;
+    border: none;
+    background-color: #357c7c;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 20px;
+    margin-top: 30px;
+}
+
+.aside_add_task:focus {
+    border: none;
+}
+
+.aside_Btn {
+    width: 80%;
+    height: 40px;
+    border: none;
+    background-color: #1fdddd;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 20px;
+    margin-top: 30px;  
+}
+
+.dashboard {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

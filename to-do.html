@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do-Web</title>
+    <link rel="stylesheet" href="to-do.css">
+</head>
+<body>
+    <aside>
+        <button class="aside_add_task" id="aside_add_task">➕ Add Task</button>
+        <button class="aside_today_task aside_Btn" id="aside_today_task">Today</button>
+        <button class="aside_tmr_task aside_Btn" id="aside_tmr_task">Tomorrow</button>
+        <button class="aside_upcomming_task aside_Btn" id="aside_upcomming_task">Upcoming</button>
+    </aside>
+    <div class="dashboard">
+        <div class="dashboard_header">
+            <h1 class="dashboard_title">To-Do List</h1>
+            <p class="dashboard_subtitle">Manage your tasks efficiently</p>
+        </div>
+        <div class="task_list" id="task_list">
+            <!-- Task items will be dynamically added here -->
+        </div>
+    </div>
+    <div class="input_back" id="input_back">
+        <div class="input_task" id="input_task">
+            <div class="task_msg">
+                <p class="end_start_text task_d">📝 Task Title</p>
+                <input type="text" id="task_input" placeholder="Enter your task here...">
+            </div>
+            <div class="description">
+                <p class="end_start_text task_d">📝 Description</p>
+                <textarea id="task_description" placeholder="Description..."></textarea>
+            </div>
+            <div class="date_time_from date_time_box">
+                <p class="end_start_text">📅 Start</p>
+                <div class="from_to">
+                    <div class="date_inp">
+                        <select class="task_date task_date_time_in">
+                            <option value="null">---</option>
+                            <option value="today">Today</option>
+                            <option value="tomorrow">Tomorrow</option>
+                            <option value="select_date">Select Date</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="due_till">
+                    <div class="date_inp">
+                        <input type="time" class="task_time task_date_time_in">
+                    </div>
+                </div>
+            </div>
+            <div class="date_time_to date_time_box">
+                <p class="end_start_text">📅 End</p>
+                <div class="from_to">
+                    <div class="date_inp">
+                        <select class="task_date task_date_time_in">
+                            <option value="null">---</option>
+                            <option value="today">Today</option>
+                            <option value="tomorrow">Tomorrow</option>
+                            <option value="select_date">Select Date</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="due_to">
+                    <div class="date_inp">
+                        <input type="time" class="task_time task_date_time_in">
+                    </div>
+                </div>
+            </div>
+            <div class="priority">
+                <p class="priority_text">⭐ Priority:</p>
+                <button class="task_priority" id="low">🟢 Low</button>
+                <button class="task_priority" id="medium">🟡 Medium </button>   
+                <button class="task_priority" id="high">🔴 High</button>
+            </div>
+            <div class="cancel_add">
+                <button class="cancel_btn" id="cancel_btn">Cancel</button>
+                <button class="add_btn" id="add_btn">Add Task</button>
+            </div>
+        </div>
+    </div>
+    <script src="to-do.js"></script>
+</body>
+</html>
