@@ -12,17 +12,17 @@
 .input_task {
     background-color: #DFF1F1;
     width: 40%;
-    height: 500px;
+    height: 550px;
     border-radius: 20px;
     visibility: hidden ;
     opacity: 0;
     box-shadow:0 10px 40px rgba(0,0,0,.6);
     position: fixed;
-    top: 20%;
     z-index: 1000;
+    top: 10%;
 }
 
-#task_input {
+.task_input {
     width: 85%;
     height: 30px;
     border: none;
@@ -34,7 +34,7 @@
     margin: 20px 20px 30px 20px;
 }
 
-#task_input:focus {
+.task_input:focus {
     outline: none;
 }
 
@@ -128,14 +128,14 @@
     outline: none;
 }
 
-.priority {
+.pri_cat {
     display: flex;
     align-items: center;
     margin: 20px 20px 0px 20px;
     gap: 10px;
 }
 
-.priority_text {
+.pri_cat_text {
     font-size: 16px;
     font-weight: bold;
 }
@@ -239,10 +239,33 @@ aside {
     display: none;
 }
 
+.date_to {
+    height: 20px;
+    display: none;
+}
+
+
 .task_priority:hover {
     background-color: aquamarine;
 }
 
 .clickBtn {
     background-color: #357c7c
+}
+
+.own {
+    height: 20px;
+    width: 200px;
+    display: none;
+    margin-bottom: 10px;
+}
+
+.cato_sel {
+    display: block;
+}
+
+.cato {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
 }

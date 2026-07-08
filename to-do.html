@@ -26,7 +26,7 @@
             <div class="input_task" id="input_task">
                 <div class="task_msg">
                     <p class="end_start_text task_d">📝 Task Title</p>
-                    <input type="text" id="task_input" placeholder="Enter your task here...">
+                    <input type="text" id="task_input" class="task_input" placeholder="Enter your task here...">
                 </div>
                 <div class="description">
                     <p class="end_start_text task_d">📝 Description</p>
@@ -36,7 +36,7 @@
                     <p class="end_start_text">📅 Start</p>
                     <div class="from_to">
                         <div class="date_inp">
-                            <select class="task_date task_date_time_in">
+                            <select class="task_date_from task_date_time_in">
                                 <option value="null">---</option>
                                 <option value="today">Today</option>
                                 <option value="tomorrow">Tomorrow</option>
@@ -47,7 +47,7 @@
                     </div>
                     <div class="due_till">
                         <div class="date_inp">
-                            <input type="time" class="task_time task_date_time_in">
+                            <input type="time" class="task_time_from task_time task_date_time_in">
                         </div>
                     </div>
                 </div>
@@ -55,26 +55,42 @@
                     <p class="end_start_text">📅 End</p>
                     <div class="from_to">
                         <div class="date_inp">
-                            <select class="task_date task_date_time_in">
+                            <select class="task_date_to task_date_time_in">
                                 <option value="null">---</option>
                                 <option value="today">Today</option>
                                 <option value="tomorrow">Tomorrow</option>
                                 <option value="select_date">Select Date</option>
                             </select>
-                            <input type="date" class="date_from task_date_time_in">
+                            <input type="date" class="date_to task_date_time_in">
                         </div>
                     </div>
                     <div class="due_to">
                         <div class="date_inp">
-                            <input type="time" class="task_time task_date_time_in">
+                            <input type="time" class="task_time_to task_time task_date_time_in">
                         </div>
                     </div>
                 </div>
-                <div class="priority">
-                    <p class="priority_text">⭐ Priority:</p>
+                <div class="priority pri_cat">
+                    <p class="priority_text pri_cat_text">⭐ Priority:</p>
                     <button class="task_priority" id="low">🟢 Low</button>
                     <button class="task_priority" id="medium">🟡 Medium </button>   
                     <button class="task_priority" id="high">🔴 High</button>
+                </div>
+                <div class="cato pri_cat" id="cato">
+                    <p class="priority_text pri_cat_text"> 🏷 Categories :</p>
+                    <select class="cato_sel task_date_time_in" id="own">
+                            <option value="null" id="null">---</option>
+                            <option value="gym" id="gym">Gym</option>
+                            <option value="school" id="school">School</option>
+                            <option value="wrk" id="wrk">Work</option>
+                            <option value="shopping" id="shopping">Shopping</option>
+                            <option value="personal" id="presonal">Personal</option>
+                            <option value="game" id="game">Game</option>
+                            <option value="meeting" id="meeting">Meeting</option>
+                            <option value="none" id="none">None</option>
+                            <option value="your_own" id="your_own">Enter Your Own</option>
+                    </select>
+                    <input type="text" class=" own task_input" id="own" placeholder="Enter your category">
                 </div>
                 <div class="cancel_add">
                     <button class="cancel_btn" id="cancel_btn">Cancel</button>
