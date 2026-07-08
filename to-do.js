@@ -10,13 +10,6 @@ const inputTask = document.getElementById('input_task');
 const cancelBtn = document.getElementById('cancel_btn');
 const addBtn = document.getElementById('add_btn');
 const asideAddTaskBtn = document.getElementById('aside_add_task');
-const dashboardBtn = document.getElementById('aside_dashboard_task');
-const todayBtn = document.getElementById('aside_today_task');
-const tomorrowBtn = document.getElementById('aside_tmr_task');
-const upcomingBtn = document.getElementById('aside_upcomming_task');
-const completedBtn = document.getElementById('aside_completed_task');
-const allTasksBtn = document.getElementById('aside_all_task');
-const dashboard = document.getElementById('dashboard');
 const task_show = document.querySelector('.task');
 const task_title = document.querySelector('#task_input');
 const task_description = document.querySelector('#task_description');
@@ -28,11 +21,7 @@ asideAddTaskBtn.addEventListener('click', function() {
 
 cancelBtn.addEventListener('click', function() {
   inputTask.classList.remove('active');
-  task_description.value = "";
-  task_title.value = "";
-  priorityBtns.forEach((item) => {
-    item.classList.remove("clickBtn");
-  });
+  resetForm ();
 });
 
 inputBack.addEventListener("click", (e) => {
@@ -235,6 +224,28 @@ function time_due () {
   
 }
 
+function button_color () {
+  const Btncolor = document.querySelector('prio_under');
+
+  let btn_color;
+
+  if ( selectedPriority == 'low') {
+
+    btn_color = 'prio_under_green'
+
+  } else if ( selectedPriority == 'high') {
+
+    btn_color = 'prio_under_red'
+
+  } else if ( selectedPriority == 'medium' ) {
+
+    btn_color = 'prio_under_yellow'
+
+  }
+
+  return btn_color;
+}
+
 function innexhtml () {
 
   const task_list_add = document.createElement("div");
@@ -244,6 +255,7 @@ function innexhtml () {
   const task_description_val = task_description.value;
 
   task_list_add.innerHTML = `
+    <button class="prio_under ${button_color()}"></button>
     <h2 class="task_tit_js">${task_title_val}</h2>
     <p class="task_des_js">${task_description_val}</p>
     <h3 class="form_due_js"> From: ${date_making_from ()} - ${time_from()} To: ${date_making_to()} - ${time_due()}</h3>
@@ -255,14 +267,155 @@ function innexhtml () {
 
   inputTask.classList.remove('active');
   
+}
 
+function resetForm() {
 
+    task_title.value = "";
+    task_description.value = "";
+
+    selectedPriority = "";
+    priorityBtns.forEach(btn => {
+        btn.classList.remove("clickBtn");
+    });
+
+    document.querySelector(".task_date_from").selectedIndex = 0;
+    document.querySelector(".task_date_to").selectedIndex = 0;
+
+    document.querySelector(".date_from").value = "";
+    document.querySelector(".date_to").value = "";
+
+    document.querySelectorAll(".task_time").forEach(time => {
+        time.value = "";
+    });
+
+    document.querySelector(".cato_sel").selectedIndex = 0;
+    document.querySelector(".own").value = "";
+
+    cato_type = "";
+    select_date_from = "";
+    select_date_to = "";
 }
 
 addBtn.addEventListener ("click", () => {
 
   innexhtml ();
-
-  task_description.value = "";
-  task_title.value = "";
+  resetForm ()
 });
+
+const dashboardBtn = document.querySelector('.aside_dashboard_task');
+const todayBtn = document.querySelector('.aside_today_task');
+const tomorrowBtn = document.querySelector('.aside_tmr_task');
+const upcomingBtn = document.querySelector('.aside_upcomming_task');
+const completedBtn = document.querySelector('.aside_completed_task');
+const allTasksBtn = document.querySelector('.aside_all_task');
+const dashboard_task = document.querySelector('.dashboard');
+const today_task = document.querySelector('.today_task');
+const tomorrow_task = document.querySelector('.tmr_task');
+const upcoming_task = document.querySelector('.upcomming_task');
+const completed_task = document.querySelector('.completed_task');
+const allTasks = document.querySelector('.all_task');
+
+
+dashboardBtn.addEventListener ("click", () => {
+
+  dashboard_task.style.opacity = '1';
+  dashboard_task.style.display = 'block';
+  today_task.style.opacity = '0';
+  today_task.style.display = 'none';
+  tomorrow_task.style.opacity = '0';
+  tomorrow_task.style.display = 'none';
+  upcoming_task.style.opacity = '0';
+  upcoming_task.style.display = 'none';
+  completed_task.style.opacity = '0';
+  completed_task.style.display = 'none';
+  allTasks.style.opacity = '0';
+  allTasks.style.display = 'none';
+
+})
+
+todayBtn.addEventListener ("click", () => {
+
+  dashboard_task.style.opacity = '0';
+  dashboard_task.style.display = 'none';
+  today_task.style.opacity = '1';
+  today_task.style.display = 'block';
+  tomorrow_task.style.opacity = '0';
+  tomorrow_task.style.display = 'none';
+  upcoming_task.style.opacity = '0';
+  upcoming_task.style.display = 'none';
+  completed_task.style.opacity = '0';
+  completed_task.style.display = 'none';
+  allTasks.style.opacity = '0';
+  allTasks.style.display = 'none';
+  
+})
+
+tomorrowBtn.addEventListener ("click", () => {
+
+  dashboard_task.style.opacity = '0';
+  dashboard_task.style.display = 'none';
+  today_task.style.opacity = '0';
+  today_task.style.display = 'none';
+  tomorrow_task.style.opacity = '1';
+  tomorrow_task.style.display = 'block';
+  upcoming_task.style.opacity = '0';
+  upcoming_task.style.display = 'none';
+  completed_task.style.opacity = '0';
+  completed_task.style.display = 'none';
+  allTasks.style.opacity = '0';
+  allTasks.style.display = 'none';
+  
+})
+
+upcomingBtn.addEventListener ("click", () => {
+
+  dashboard_task.style.opacity = '0';
+  dashboard_task.style.display = 'none';
+  today_task.style.opacity = '0';
+  today_task.style.display = 'none';
+  tomorrow_task.style.opacity = '0';
+  tomorrow_task.style.display = 'none';
+  upcoming_task.style.opacity = '1';
+  upcoming_task.style.display = 'block';
+  completed_task.style.opacity = '0';
+  completed_task.style.display = 'none';
+  allTasks.style.opacity = '0';
+  allTasks.style.display = 'none';
+  
+})
+
+
+completedBtn.addEventListener ("click", () => {
+
+  dashboard_task.style.opacity = '0';
+  dashboard_task.style.display = 'none';
+  today_task.style.opacity = '0';
+  today_task.style.display = 'none';
+  tomorrow_task.style.opacity = '0';
+  tomorrow_task.style.display = 'none';
+  upcoming_task.style.opacity = '0';
+  upcoming_task.style.display = 'none';
+  completed_task.style.opacity = '1';
+  completed_task.style.display = 'block';
+  allTasks.style.opacity = '0';
+  allTasks.style.display = 'none';
+  
+})
+
+allTasksBtn.addEventListener ("click", () => {
+
+  dashboard_task.style.opacity = '0';
+  dashboard_task.style.display = 'none';
+  today_task.style.opacity = '0';
+  today_task.style.display = 'none';
+  tomorrow_task.style.opacity = '0';
+  tomorrow_task.style.display = 'none';
+  upcoming_task.style.opacity = '0';
+  upcoming_task.style.display = 'none';
+  completed_task.style.opacity = '0';
+  completed_task.style.display = 'none';
+  allTasks.style.opacity = '1';
+  allTasks.style.display = 'block';
+  
+})
