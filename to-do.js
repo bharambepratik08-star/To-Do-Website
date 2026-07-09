@@ -267,17 +267,29 @@ addBtn.addEventListener("click", () => {
         to: date_making_to(),
         priority: selectedPriority,
         category: prio_in(),
-        completed: false
+        completed:
+        editingIndex === null
+            ? false
+            : tasks[editingIndex].completed
     };
+  
+if (editingIndex === null) {
 
-tasks.push(task);
+    tasks.push(task);
 
-localStorage.setItem("tasks", JSON.stringify(tasks));
+} else {
 
-renderTasks();
-inputTask.classList.remove("active");
-inputBack.style.display = "none";
-resetForm();
+    tasks[editingIndex] = task;
+
+    editingIndex = null;
+}
+
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+
+  renderTasks();
+  inputTask.classList.remove("active");
+  inputBack.style.display = "none";
+  resetForm();
 
 });
 
@@ -289,13 +301,6 @@ function renderTasks() {
     const alltask_list = document.querySelector(".all_task_lis");
     const complete_done = document.querySelector('.compl_task');
     const task_show = document.querySelector('.task');
-
-    console.log(document.querySelector(".task"));
-console.log(document.querySelector(".today_task_list"));
-console.log(document.querySelector(".tmr_task_print"));
-console.log(document.querySelector(".upcoming_task_print"));
-console.log(document.querySelector(".compl_task"));
-console.log(document.querySelector(".all_task_lis"));
     
     task_show.innerHTML = "";
     todayContainer.innerHTML = "";
@@ -458,6 +463,8 @@ allTasksBtn.addEventListener ("click", () => {
   
 })
 
+let editingIndex = null;
+
 function createTask(task, container) {
 
     const card = document.createElement("div");
@@ -498,6 +505,24 @@ function createTask(task, container) {
 
     container.appendChild(card);
 
+    card.querySelector(".edit_Btn").addEventListener("click", () => {
+
+    editingIndex = index;
+
+    task_title.value = task.title;
+    task_description.value = task.description;
+    selectsc.value = task.from;
+    selects.value = task.to;
+    selectedPriority = task.priority;
+    cato.value = task.category;
+
+    
+
+    inputTask.classList.add("active");
+    inputBack.style.display = "flex";
+});
+
+
     card.querySelector(".complete_btn").addEventListener("click", () => {
 
     tasks[index].completed = !tasks[index].completed;
@@ -516,12 +541,16 @@ function createTask(task, container) {
     renderTasks();
 
     });
+
+
 }
 renderTasks();
+
 
 const clearData = document.querySelector(".clearMain") 
 
 clearData.addEventListener("click", () => {
   localStorage.clear();
   location.reload();
-})
+}) 
+
