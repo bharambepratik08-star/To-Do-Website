@@ -492,6 +492,8 @@ function createTask(task, container) {
       <button class="delete_btn">
       Delete
       </button>
+
+      <button class="edit_Btn">Edit</button>
       `;
 
     container.appendChild(card);
