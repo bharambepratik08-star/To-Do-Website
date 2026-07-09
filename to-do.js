@@ -1,5 +1,7 @@
 const textarea = document.getElementById('task_description');
 
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
 textarea.addEventListener('input', function() {
   this.style.height = 'auto';
   this.style.height = (this.scrollHeight) + 'px';
@@ -15,21 +17,23 @@ const task_title = document.querySelector('#task_input');
 const task_description = document.querySelector('#task_description');
 
 
-asideAddTaskBtn.addEventListener('click', function() {
-  inputTask.classList.add('active');
+asideAddTaskBtn.addEventListener("click", () => {
+    inputBack.style.display = "flex";
+    inputTask.classList.add("active");
 });
 
-cancelBtn.addEventListener('click', function() {
-  inputTask.classList.remove('active');
-  resetForm ();
+cancelBtn.addEventListener("click", () => {
+    inputTask.classList.remove("active");
+    inputBack.style.display = "none";
+    resetForm();
 });
 
-inputBack.addEventListener("click", (e) => {
-
-    if (e.target === inputBack) {
+inputBack.addEventListener("click",(e)=>{
+    if(e.target===inputBack){
         inputTask.classList.remove("active");
+        inputBack.style.display="none";
+        resetForm();
     }
-
 });
 
 
@@ -224,51 +228,6 @@ function time_due () {
   
 }
 
-function button_color () {
-  const Btncolor = document.querySelector('prio_under');
-
-  let btn_color;
-
-  if ( selectedPriority == 'low') {
-
-    btn_color = 'prio_under_green'
-
-  } else if ( selectedPriority == 'high') {
-
-    btn_color = 'prio_under_red'
-
-  } else if ( selectedPriority == 'medium' ) {
-
-    btn_color = 'prio_under_yellow'
-
-  }
-
-  return btn_color;
-}
-
-function innexhtml () {
-
-  const task_list_add = document.createElement("div");
-  task_list_add.classList.add("task_list");
-
-  const task_title_val = task_title.value;
-  const task_description_val = task_description.value;
-
-  task_list_add.innerHTML = `
-    <button class="prio_under ${button_color()}"></button>
-    <h2 class="task_tit_js">${task_title_val}</h2>
-    <p class="task_des_js">${task_description_val}</p>
-    <h3 class="form_due_js"> From: ${date_making_from ()} - ${time_from()} To: ${date_making_to()} - ${time_due()}</h3>
-    <h3 class="priority_js">Priority : ${selectedPriority}</h3>
-    <h3 class="cato_js">Catogery : ${prio_in ()}</h3>
-  `;
-
-  task_show.appendChild(task_list_add);
-
-  inputTask.classList.remove('active');
-  
-}
-
 function resetForm() {
 
     task_title.value = "";
@@ -295,13 +254,93 @@ function resetForm() {
     cato_type = "";
     select_date_from = "";
     select_date_to = "";
+
+
 }
 
-addBtn.addEventListener ("click", () => {
+addBtn.addEventListener("click", () => {
 
-  innexhtml ();
-  resetForm ()
+    const task = {
+        title: task_title.value,
+        description: task_description.value,
+        from: date_making_from(),
+        to: date_making_to(),
+        priority: selectedPriority,
+        category: prio_in(),
+        completed: false
+    };
+
+tasks.push(task);
+
+localStorage.setItem("tasks", JSON.stringify(tasks));
+
+renderTasks();
+inputTask.classList.remove("active");
+inputBack.style.display = "none";
+resetForm();
+
 });
+
+function renderTasks() {
+
+    const todayContainer = document.querySelector(".today_task_list");
+    const tmrContainer = document.querySelector(".tmr_task_print");
+    const upcomingContainer = document.querySelector(".upcoming_task_print");
+    const alltask_list = document.querySelector(".all_task_lis");
+    const complete_done = document.querySelector('.compl_task');
+    const task_show = document.querySelector('.task');
+
+    console.log(document.querySelector(".task"));
+console.log(document.querySelector(".today_task_list"));
+console.log(document.querySelector(".tmr_task_print"));
+console.log(document.querySelector(".upcoming_task_print"));
+console.log(document.querySelector(".compl_task"));
+console.log(document.querySelector(".all_task_lis"));
+    
+    task_show.innerHTML = "";
+    todayContainer.innerHTML = "";
+    tmrContainer.innerHTML = "";
+    upcomingContainer.innerHTML = "";
+    complete_done.innerHTML = "";
+    alltask_list.innerHTML = "";
+
+    let tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    tasks.forEach(task => {
+
+        if (!task.completed) {
+            createTask(task, task_show);
+        }
+
+        if (!task.completed &&
+            task.to === new Date().toLocaleDateString()) {
+
+            createTask(task, todayContainer);
+        }
+
+        if (!task.completed &&
+            task.to === tomorrow.toLocaleDateString()) {
+
+            createTask(task, tmrContainer);
+        }
+
+        if (!task.completed &&
+            task.to !== new Date().toLocaleDateString() &&
+            task.to !== tomorrow.toLocaleDateString()) {
+
+            createTask(task, upcomingContainer);
+        }
+
+        if (task.completed) {
+            createTask(task, complete_done);
+        }
+
+        createTask(task, alltask_list);
+
+    });
+
+}
 
 const dashboardBtn = document.querySelector('.aside_dashboard_task');
 const todayBtn = document.querySelector('.aside_today_task');
@@ -385,7 +424,6 @@ upcomingBtn.addEventListener ("click", () => {
   
 })
 
-
 completedBtn.addEventListener ("click", () => {
 
   dashboard_task.style.opacity = '0';
@@ -418,4 +456,70 @@ allTasksBtn.addEventListener ("click", () => {
   allTasks.style.opacity = '1';
   allTasks.style.display = 'block';
   
+})
+
+function createTask(task, container) {
+
+    const card = document.createElement("div");
+    const index = tasks.indexOf(task);
+    card.classList.add("task_list");
+
+    card.innerHTML = `
+      <button class="prio_under ${
+      task.priority==="high"
+      ?"prio_under_red"
+      :task.priority==="medium"
+      ?"prio_under_yellow"
+      :"prio_under_green"
+      }"></button>
+
+      <h2>${task.title}</h2>
+
+      <p>${task.description}</p>
+
+      <h3>From : ${task.from}</h3>
+
+      <h3>To : ${task.to}</h3>
+
+      <h3>Priority : ${task.priority}</h3>
+
+      <h3>Category : ${task.category}</h3>
+
+      <button class="complete_btn">
+      ${task.completed ? "Undo" : "Complete"}
+      </button>
+
+      <button class="delete_btn">
+      Delete
+      </button>
+      `;
+
+    container.appendChild(card);
+
+    card.querySelector(".complete_btn").addEventListener("click", () => {
+
+    tasks[index].completed = !tasks[index].completed;
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+
+    renderTasks();
+
+    });
+    card.querySelector(".delete_btn").addEventListener("click", () => {
+
+    tasks.splice(index, 1);
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+
+    renderTasks();
+
+    });
+}
+renderTasks();
+
+const clearData = document.querySelector(".clearMain") 
+
+clearData.addEventListener("click", () => {
+  localStorage.clear();
+  location.reload();
 })
